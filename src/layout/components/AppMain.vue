@@ -121,7 +121,8 @@ watch(
 
 <style scoped lang="scss">
 .app-main {
-  padding: $appMainPadding;
+  padding: 6px 10px 14px 14px;
+  background-color: #E6E6E6;
   /*50 = navbar  */
   position: relative;
   overflow: hidden;

@@ -5,7 +5,7 @@
     <!--right container-->
     <div class="main-container">
       <Navbar v-if="settings.showTopNavbar" />
-      <TagsView v-if="settings.showTagsView" />
+      <!-- <TagsView v-if="settings.showTagsView" /> -->
       <AppMain />
     </div>
   </div>

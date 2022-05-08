@@ -1,41 +1,41 @@
 <template>
-  <div class="navbar rowBC reset-el-dropdown">
+  <div
+    class="navbar rowBC reset-el-dropdown"
+    :style="{
+      backgroundColor: scssJson[`${theme}-menuBg`],
+      color: scssJson[`${theme}-menuText`]
+    }"
+  >
     <div class="rowSC">
-      <hamburger
-        v-if="settings.showHamburger"
-        :is-active="opened"
-        class="hamburger-container"
-        @toggleClick="toggleSideBar"
-      />
-      <breadcrumb class="breadcrumb-container" />
+      
+      <svg-icon icon-class="theme" class="cursor" style="font-size: 15px; margin: 0 11px 0 20px;" @click="toggleSideBar"/>
+
+      <breadcrumb class="breadcrumb-container"/>
     </div>
     <!--nav title-->
     <div v-if="settings.showNavbarTitle" class="heardCenterTitle">{{ settings.showNavbarTitle }}</div>
     <div v-if="settings.ShowDropDown" class="right-menu rowSC">
+
+      <el-select placeholder="请选择" class="mr-3"/>
+
       <ScreenFull />
-      <SizeSelect />
-      <LangSelect />
-      <el-dropdown trigger="click" size="medium">
+      <svg-icon
+        icon-class="theme"
+        class="nav-svg-icon"
+        style="margin: -1px 15px 0 15px"
+        @click="toggleTheme(theme === 'dark' ? 'bright' : 'dark')"
+      />
+      <el-dropdown size="medium">
         <div class="avatar-wrapper">
           <img
-            src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80"
+            src=""
             class="user-avatar"
           />
-          <CaretBottom style="width: 1em; height: 1em; margin-left: 4px" />
+          <span :style="{color: scssJson[`${theme}-menuText`]}">测试测试</span>
         </div>
         <template #dropdown>
           <el-dropdown-menu>
-            <router-link to="/">
-              <el-dropdown-item>Home</el-dropdown-item>
-            </router-link>
-            <a target="_blank" href="https://github.com/jzfai/vue3-admin-ts">
-              <el-dropdown-item>Github</el-dropdown-item>
-            </a>
-            <a target="_blank" href="https://juejin.cn/post/7036302298435289095">
-              <el-dropdown-item>Docs</el-dropdown-item>
-            </a>
-            <!--<el-dropdown-item>修改密码</el-dropdown-item>-->
-            <el-dropdown-item divided @click="loginOut">login out</el-dropdown-item>
+            <el-dropdown-item @click="loginOut">退出</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -44,11 +44,10 @@
 </template>
 
 <script setup>
-import SizeSelect from '@/components/SizeSelect/index.vue'
-import LangSelect from '@/components/LangSelect/index.vue'
 import ScreenFull from '@/components/ScreenFull/index.vue'
+import scssExportJson from '@/styles/variables-to-js.scss'
+import { dillScssExportToJson } from '@/utils/validate'
 
-import { CaretBottom } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 import Breadcrumb from './Breadcrumb'
 import Hamburger from './Hamburger'
@@ -56,12 +55,19 @@ import Hamburger from './Hamburger'
 import { useAppStore } from '@/store/app'
 import { useUserStore } from '@/store/user'
 
+const scssJson = dillScssExportToJson(scssExportJson)
+
 const settings = computed(() => {
   return appStore.settings
 })
 const opened = computed(() => {
   return appStore.sidebar.opened
 })
+
+const theme = computed(() => {
+  return appStore.theme
+})
+
 const appStore = useAppStore()
 const toggleSideBar = () => {
   appStore.M_toggleSideBar()
@@ -71,6 +77,11 @@ const toggleSideBar = () => {
  * */
 const router = useRouter()
 const route = useRoute()
+
+const toggleTheme = (value) => {
+  appStore.M_theme(value)
+}
+
 const loginOut = () => {
   const userStore = useUserStore()
   userStore.logout().then(() => {
@@ -85,21 +96,23 @@ const loginOut = () => {
   height: $navBarHeight;
   overflow: hidden;
   position: relative;
-  background: #fff;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 }
 
 //logo
 .avatar-wrapper {
-  margin-top: 5px;
   position: relative;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 
   .user-avatar {
     cursor: pointer;
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
+    width: 36px;
+    height: 36px;
+    margin-right: 5px;
+    border-radius: 50%;
+    overflow: hidden;
   }
 
   .el-icon-caret-bottom {
@@ -125,6 +138,6 @@ const loginOut = () => {
 //drop-down
 .right-menu {
   cursor: pointer;
-  margin-right: 40px;
+  margin-right: 15px;
 }
 </style>

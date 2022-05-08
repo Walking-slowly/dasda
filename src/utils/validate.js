@@ -78,3 +78,16 @@ export function isArray(arg) {
   }
   return Array.isArray(arg)
 }
+
+export function dillScssExportToJson (scssExportJson) {
+  const jsonString = scssExportJson.replace(/:export\s*/, '').replace(/[\s+\r\n]/g, '')
+  const scssJson = {}
+  jsonString
+    .slice(1, jsonString.length - 2)
+    .split(';')
+    .forEach((fItem) => {
+      const arr = fItem.split(':')
+      scssJson[arr[0]] = arr[1]
+    })
+  return scssJson
+}

@@ -1,7 +1,6 @@
 <template>
   <div class="dashboard-container scroll-y">
-    <Admin v-if="roles.includes('admin')" />
-    <Editor v-else />
+    sss
   </div>
 </template>
 

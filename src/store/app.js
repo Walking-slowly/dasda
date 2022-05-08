@@ -11,7 +11,8 @@ export const useAppStore = defineStore('app', {
       device: 'desktop',
       settings: defaultSettings,
       cachedViews: [],
-      cachedViewsDeep: []
+      cachedViewsDeep: [],
+      theme: 'dark'
     }
   },
 
@@ -24,6 +25,13 @@ export const useAppStore = defineStore('app', {
         state.settings = { ...state.settings, ...data }
       })
     },
+
+    M_theme(data) {
+      this.$patch((state) => {
+        state.theme = data
+      })
+    },
+
     M_sidebar_opened(data) {
       this.$patch((state) => {
         state.sidebar.opened = data

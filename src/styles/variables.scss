@@ -1,14 +1,11 @@
 // 全局变量定义
-$menuText: #bfcbd9;
-$menuActiveText: #409eff;
-$subMenuActiveText: #f4f4f5;
+$menuActiveText: #AACE38;
 
-$menuBg: #304156;
 $menuHover: #263445;
 
 $subMenuBg: #1f2d3d;
 $subMenuHover: #001528;
-$sideBarWidth: 210px;
+$sideBarWidth: 230px;
 
 //navbar
 $navBarHeight: 50px;
@@ -16,6 +13,23 @@ $navBarHeight: 50px;
 $tagViewHeight: 32px;
 //app-main padding
 $appMainPadding: 10px;
+
+$menuBg: #383842;
+$menuText: #F9F9F9;
+$menuItemBg: #33333E;
+$menuLineBg: #474753;
+$menuCircleBg: #C4C4C4;
+
+$bright_menuBg: #F9F9F9;
+$bright_menuText: #383842;
+$bright_menuItemBg: #F1F1F1;
+$bright_menuLineBg: #DCDFE6;
+$bright_menuCircleBg: #383842;
+
+// element-plus
+:root {
+    --el-color-primary: #AACE38;
+}
 
 //导出scss定义的样式变量
 //vite无法获取scss变量https://github.com/vitejs/vite/issues/1279

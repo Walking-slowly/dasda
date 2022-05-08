@@ -1,5 +1,5 @@
 <template>
-  <div id="screenfull" class="pl-1 pr-1 mtPx-2" >
+  <div id="screenfull">
     <svg-icon :icon-class="isFullscreen ? 'exit-fullscreen' : 'fullscreen'" class="nav-svg-icon" @click="click" />
   </div>
 </template>
@@ -49,8 +49,7 @@ let { isFullscreen } = toRefs(state)
 
 <style lang="scss">
 .nav-svg-icon {
-  font-size: 18px;
-  color: #5a5e66;
-  margin-top: 4px;
+  font-size: 15px;
+  margin-top: 3px;
 }
 </style>

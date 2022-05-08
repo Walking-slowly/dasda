@@ -1,10 +1,22 @@
 :export {
-  menuText: $menuText;
   menuActiveText: $menuActiveText;
-  subMenuActiveText: $subMenuActiveText;
-  menuBg: $menuBg;
-  menuHover: $menuHover;
   subMenuBg: $subMenuBg;
   subMenuHover: $subMenuHover;
   sideBarWidth: $sideBarWidth;
+
+  dark: {
+    menuBg: $menuBg;
+    menuText: $menuText;
+    menuItemBg: $menuItemBg;
+    menuLineBg: $menuLineBg;
+    menuCircleBg: $menuCircleBg;
+  }
+
+  bright: {
+    menuBg: $bright_menuBg;
+    menuText: $bright_menuText;
+    menuItemBg: $bright_menuItemBg;
+    menuLineBg: $bright_menuLineBg;
+    menuCircleBg: $bright_menuCircleBg;
+  }
 }

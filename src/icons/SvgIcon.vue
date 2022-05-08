@@ -40,7 +40,7 @@ export default defineComponent({
 .nav-icon {
   display: inline-block;
   font-size: 15px;
-  margin-right: 12px;
+  margin-right: 15px;
   position: relative;
 }
 
@@ -49,6 +49,5 @@ export default defineComponent({
   height: 1em;
   position: relative;
   fill: currentColor;
-  vertical-align: -2px;
 }
 </style>

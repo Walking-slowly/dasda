@@ -3,10 +3,10 @@
     <!--has transition  Judging by settings.mainNeedAnimation-->
     <transition-group v-if="settings.mainNeedAnimation" name="breadcrumb">
       <el-breadcrumb-item v-for="(item, index) in levelList" :key="item.path">
-        <span v-if="item.redirect === 'noRedirect' || index === levelList.length - 1" class="no-redirect">
+        <span v-if="item.redirect === 'noRedirect' || index === levelList.length - 1" class="no-redirect" :style="{color: theme === 'dark' ? '#C4C4C4' : '#383842'}">
           {{ item.meta?.title }}
         </span>
-        <a v-else @click.prevent="handleLink(item)">{{ item.meta.title }}</a>
+        <a v-else @click.prevent="handleLink(item)" :style="{color: theme === 'dark' ? '#C4C4C4' : '#383842'}">{{ item.meta.title }}</a>
       </el-breadcrumb-item>
     </transition-group>
     <!--no transition-->
@@ -31,6 +31,10 @@ import { useAppStore } from '@/store/app'
 const appStore = useAppStore()
 const settings = computed(() => {
   return appStore.settings
+})
+
+const theme = computed(() => {
+  return appStore.theme
 })
 
 const route = useRoute()
@@ -85,11 +89,18 @@ onBeforeMount(() => {
   display: inline-block;
   font-size: 14px;
   line-height: 50px;
-  margin-left: 8px;
 
   .no-redirect {
-    color: #97a8be;
     cursor: text;
+  }
+}
+</style>
+
+<style lang="scss">
+.app-breadcrumb {
+  .el-breadcrumb__separator {
+    margin: 0 5px;
+    font-weight: normal;
   }
 }
 </style>

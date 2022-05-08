@@ -87,7 +87,7 @@ export const usePermissionStore = defineStore('permission', {
     M_routes(routes) {
       this.$patch((state) => {
         state.addRoutes = routes
-        state.routes = constantRoutes.concat(routes)
+        state.routes = asyncRoutes
       })
     },
     M_isGetUserInfo(data) {

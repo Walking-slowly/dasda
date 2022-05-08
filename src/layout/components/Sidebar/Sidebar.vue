@@ -3,15 +3,15 @@
     <!--logo-->
     <Logo v-if="settings.sidebarLogo" :collapse="!isCollapse" />
     <!--router nav-->
-    <el-scrollbar>
+    <el-scrollbar :style="{ backgroundColor: scssJson[`${theme}-menuBg`] }">
       <el-menu
         class="el-menu-vertical"
         :default-active="activeMenu"
         :collapse="!isCollapse"
         :unique-opened="false"
         :collapse-transition="false"
-        :background-color="scssJson.menuBg"
-        :text-color="scssJson.menuText"
+        :background-color="scssJson[`${theme}-menuBg`]"
+        :text-color="scssJson[`${theme}-menuText`]"
         :active-text-color="scssJson.menuActiveText"
         mode="vertical"
       >
@@ -24,6 +24,7 @@
 <script setup>
 import Logo from './Logo.vue'
 import SidebarItem from './SidebarItem.vue'
+import { dillScssExportToJson } from '@/utils/validate'
 //导入配置文件
 
 const appStore = useAppStore()
@@ -40,19 +41,13 @@ const isCollapse = computed(() => {
   return appStore.sidebar.opened
 })
 
-//change  scss variable to js
-const dillScssExportToJson = (scssExportJson) => {
-  const jsonString = scssExportJson.replace(/:export\s*/, '').replace(/[\s+\r\n]/g, '')
-  const scssJson = {}
-  jsonString
-    .slice(1, jsonString.length - 2)
-    .split(';')
-    .forEach((fItem) => {
-      const arr = fItem.split(':')
-      scssJson[arr[0]] = arr[1]
-    })
-  return scssJson
-}
+const theme = computed(() => {
+  return appStore.theme
+})
+
+onMounted(() => {
+  console.log(routes, '111111111111')
+})
 
 //get scss variable
 import scssExportJson from '@/styles/variables-to-js.scss'
@@ -81,5 +76,29 @@ const activeMenu = computed(() => {
 
 .el-menu-vertical {
   width: $sideBarWidth;
+  .el-menu-item.is-active {
+    color: $menuActiveText !important;
+    .circle {
+      background-color: $menuActiveText !important;
+    }
+  }
+
+  .submenu-title-noDropdown, .el-sub-menu__title {
+    padding: 0 20px 0 21px;
+  }
+}
+.el-menu--collapse .el-tooltip__trigger {
+  padding-right: 0;
+}
+.el-menu--vertical {
+  .el-menu--popup-right-start {
+    padding: 0 !important;
+    border-radius: 4px !important;
+    overflow: hidden;
+    a .el-menu-item:hover {
+      background-color: $menuActiveText !important;
+      color:#FFFFFF !important;
+    }
+  }
 }
 </style>
